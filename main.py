@@ -1,11 +1,13 @@
-# Handle '/start' and '/help'
+import asyncio
+
 from telebot.async_telebot import AsyncTeleBot
 
 from config.settings import BOT_TOKEN
 
-bot = AsyncTeleBot(token=BOT_TOKEN, parse_mode='HTML')
+bot = AsyncTeleBot(BOT_TOKEN)
 
 
+# Handle '/start' and '/help'
 @bot.message_handler(commands=['help', 'start'])
 async def send_welcome(message):
     text = 'Hi, I am EchoBot.\nJust write me something and I will repeat it!'
@@ -16,3 +18,6 @@ async def send_welcome(message):
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
     await bot.reply_to(message, message.text)
+
+
+asyncio.run(bot.polling())

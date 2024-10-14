@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+import telebot
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users',
+    'bot',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
@@ -136,3 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User settings
 
 AUTH_USER_MODEL = 'users.User'
+
+#Telegram bot settings
+
+BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
